@@ -10,6 +10,8 @@ export default () => {
     name: '',
     singer: '',
     isFavorite: false,
+    likeSinger: false,
+    duration: 0,
   })
   const getSongDetail = async () => {
     const { code, data } = await fetchSongDetail()

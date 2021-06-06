@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-import { log } from 'util'
 import { ref, computed, defineComponent, onMounted, toRefs } from 'vue'
 
 export default defineComponent({
@@ -29,11 +28,11 @@ export default defineComponent({
     // 获取ref为sliderWrapper的元素，神奇
     const sliderWrapper = ref()
 
-    const onClickWrapper = (event) => {
+    const onClickWrapper = (event: MouseEvent) => {
       const left = sliderWrapper.value.getBoundingClientRect().left
       const clientX = event.clientX
       const wrapperWidth = sliderWrapper.value.clientWidth
-      const value = (clientX - left) / wrapperWidth
+      let value = (clientX - left) / wrapperWidth
       if (value > 1) value = 1
       if (value < 0) value = 0
       emit('update:modelValue', value)

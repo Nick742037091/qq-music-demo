@@ -19,4 +19,13 @@ export default defineConfig({
     },
   },
   plugins: [vue()],
+  server: {
+    // proxy: {
+    //   '/dev': {
+    //     target: 'http://localhost:3333/',
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/dev/, ''),
+    //   },
+    // },
+  },
 })
