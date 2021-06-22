@@ -8,12 +8,18 @@
       <div>{{ formatPlayedTime }}</div>
       <div>{{ formatDuration }}</div>
     </div>
-    <PlayBlock />
+    <PlayBlock
+      :isPlaying="isPlaying"
+      @togglePlay="onTogglePlay"
+      @forward="jumpForward15s"
+      @backward="jumpBackward15s"
+    />
+    <audio :src="songDetail.url" ref="audio" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { SongDeatail } from '@/model/song'
 import Poster from './components/Poster.vue'
 import InfoBlock from './components/InfoBlock.vue'
@@ -36,10 +42,16 @@ export default defineComponent({
       default: () => ({}),
     },
   },
+  mounted() {},
   setup(props) {
-    const usePlayStatusData = usePlayStatus(props)
+    // 定义元素为HTMLMediaElement
+    const audio = ref<HTMLMediaElement>()
+
+    const playStatus = usePlayStatus(props, audio)
+
     return {
-      ...usePlayStatusData,
+      ...playStatus,
+      audio,
     }
   },
 })

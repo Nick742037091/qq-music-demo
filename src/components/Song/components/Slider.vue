@@ -29,6 +29,7 @@ export default defineComponent({
     const sliderWrapper = ref()
 
     const onClickWrapper = (event: MouseEvent) => {
+      // 这里注意sliderWrapper.value才是元素
       const left = sliderWrapper.value.getBoundingClientRect().left
       const clientX = event.clientX
       const wrapperWidth = sliderWrapper.value.clientWidth

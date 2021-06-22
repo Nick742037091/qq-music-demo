@@ -14,5 +14,6 @@ Mockjs.mock(/song\/detail/, 'get', {
     isFavorite: false,
     likeSinger: false,
     duration: 545,
+    url: 'http://music.163.com/song/media/outer/url?id=447925558.mp3',
   },
 })

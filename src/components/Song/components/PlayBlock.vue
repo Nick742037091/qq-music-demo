@@ -1,43 +1,45 @@
 <template>
   <div class="play-block">
-    <img
-      v-for="item in BTN_LIST"
-      :key="item.key"
-      :src="item.icon"
-      :class="{ 'play-btn': item.key === 'play' }"
-    />
+    <img src="src/assets/icon_refresh.png" />
+    <img src="src/assets/icon_backward.png" @click="onClickBackward" />
+    <img class="play-btn" :src="btnImgSrc" @click="onTogglePlay" />
+    <img src="src/assets/icon_forward.png" @click="onClickForward" />
+    <img src="src/assets/icon_play_list.png" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-const BTN_LIST: BtnItem[] = [
-  {
-    key: 'refresh',
-    icon: 'src/assets/icon_refresh.png',
-  },
-  {
-    key: 'backward',
-    icon: 'src/assets/icon_backward.png',
-  },
-  {
-    key: 'play',
-    icon: 'src/assets/icon_play.png',
-  },
-  {
-    key: 'forward',
-    icon: 'src/assets/icon_forward.png',
-  },
-  {
-    key: 'playList',
-    icon: 'src/assets/icon_play_list.png',
-  },
-]
+import { computed, defineComponent, toRefs } from 'vue'
 
 export default defineComponent({
-  setup() {
+  props: {
+    isPlaying: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props, { emit }) {
+    const { isPlaying } = toRefs(props)
+    /***** 播放相关 ******/
+    const btnImgSrc = computed(() => {
+      return isPlaying.value
+        ? 'src/assets/icon_pause.png'
+        : 'src/assets/icon_play.png'
+    })
+    const onTogglePlay = () => {
+      emit('togglePlay')
+    }
+    const onClickForward = () => {
+      emit('forward')
+    }
+    const onClickBackward = () => {
+      emit('backward')
+    }
     return {
-      BTN_LIST,
+      onTogglePlay,
+      onClickForward,
+      onClickBackward,
+      btnImgSrc,
     }
   },
 })
