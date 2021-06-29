@@ -19,7 +19,8 @@ export default defineComponent({
   setup(props) {
     const { url } = toRefs(props)
     const posterStyle = computed(() => {
-      const backgroundImg = url.value || DEFAULT_POSTER
+      // const backgroundImg = url.value || DEFAULT_POSTER
+      const backgroundImg = DEFAULT_POSTER
       return {
         backgroundImage: `url(${backgroundImg})`,
       }

@@ -42,12 +42,11 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  mounted() {},
   setup(props) {
     // 定义元素为HTMLMediaElement
     const audio = ref<HTMLMediaElement>()
 
-    const playStatus = usePlayStatus(props, audio)
+    const playStatus = usePlayStatus(audio)
 
     return {
       ...playStatus,
