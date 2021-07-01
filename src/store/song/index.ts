@@ -1,29 +1,40 @@
-import { Module, MutationTree, ActionTree } from 'vuex'
-import { SongState } from './types'
+import store from '@/store'
+import {
+  Module,
+  VuexModule,
+  Mutation,
+  Action,
+  getModule
+} from 'vuex-module-decorators'
 import { SongDeatail } from '@/model/song'
-import { fetchSongDetail } from '@/api/song'
+import { fetchSongList } from '@/api/song'
 
-const state: SongState = {
-  songDetail: {},
-}
+// 使用vuex-module-decorators，增强类型推导功能
+@Module({ dynamic: true, store, name: 'mm', namespaced: true })
+class SongModule extends VuexModule {
+  songList: SongDeatail[] = []
+  songIndex = 0
 
-const mutations: MutationTree<SongState> = {
-  setSongDetail(state, payload: SongDeatail) {
-    state.songDetail = payload
-  },
-}
+  get songDetail() {
+    return this.songList[this.songIndex] || {}
+  }
 
-const actions: ActionTree<SongState, null> = {
-  async getSongDetail({ commit }) {
-    const { code, data } = await fetchSongDetail()
+  @Mutation
+  setSongList(payload: SongDeatail[]) {
+    this.songList = payload
+  }
+
+  @Mutation
+  setSongIndex(payload: number) {
+    this.songIndex = payload
+  }
+
+  @Action
+  async getSongList() {
+    const { code, data } = await fetchSongList()
     if (code !== 0) return
-    commit('setSongDetail', data)
-  },
+    this.setSongList(data)
+  }
 }
-const module: Module<SongState, null> = {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-}
-export default module
+
+export default getModule(SongModule)

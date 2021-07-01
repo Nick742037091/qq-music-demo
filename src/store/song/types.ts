@@ -1,5 +1,6 @@
 import { SongDeatail } from '@/model/song'
 
 export interface SongState {
-  songDetail: SongDeatail | {}
+  songIndex: number
+  songList: SongDeatail[]
 }

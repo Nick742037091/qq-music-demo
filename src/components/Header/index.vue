@@ -3,10 +3,10 @@
     <div class="arrow-down" />
     <div class="tab-block">
       <div
-        class="tab"
-        :key="item.key"
-        :class="{ 'tab--active': index === tabIndex }"
         v-for="(item, index) in tabList"
+        :key="item.key"
+        class="tab"
+        :class="{ 'tab--active': index === tabIndex }"
         @click.stop="onClickTab(index)"
       >
         {{ item.title }}
@@ -17,30 +17,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive } from 'vue'
 const TAB_LIST = [
   { key: 'recommend', title: '推荐' },
   { key: 'song', title: '歌曲' },
-  { key: 'lyric', title: '歌词' },
+  { key: 'lyric', title: '歌词' }
 ]
 
 export default defineComponent({
   props: {
     tabIndex: {
       type: Number,
-      default: 1,
-    },
+      default: 1
+    }
   },
-  setup(props, { emit }) {
+  emits: ['update:tabIndex'],
+  setup(_, { emit }) {
     const tabList = reactive(TAB_LIST)
     const onClickTab = (index: number) => {
       emit('update:tabIndex', index)
     }
     return {
       tabList,
-      onClickTab,
+      onClickTab
     }
-  },
+  }
 })
 </script>
 

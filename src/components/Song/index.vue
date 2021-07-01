@@ -1,7 +1,7 @@
 <template>
   <div class="song">
-    <Poster :url="songDetail.poster" />
-    <InfoBlock :songDetail="songDetail" />
+    <Poster />
+    <InfoBlock />
     <ActionBlock />
     <Slider v-model="playedRatio" @change="onChangeSlider" />
     <div class="time-block">
@@ -9,25 +9,27 @@
       <div>{{ formatDuration }}</div>
     </div>
     <PlayBlock
-      :isPlaying="isPlaying"
+      :is-playing="isPlaying"
       @togglePlay="onTogglePlay"
       @forward="jumpForward15s"
       @backward="jumpBackward15s"
+      @togglePlayList="showPlayList = true"
     />
-    <audio :src="songDetail.url" ref="audio" />
+    <audio ref="audio" :src="audioUrl" />
+    <PlayList v-model="showPlayList" />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue'
-import { useStore } from 'vuex'
+import { computed, defineComponent, ref } from 'vue'
 import Poster from './components/Poster.vue'
 import InfoBlock from './components/InfoBlock.vue'
 import ActionBlock from './components/ActionBlock.vue'
 import Slider from './components/Slider.vue'
 import PlayBlock from './components/PlayBlock.vue'
+import PlayList from './components/PlayList.vue'
 import usePlayStatus from '@/composables/song/usePlayStatus'
-import { SongState } from '@/store/song/types'
+import SongStore from '@/store/song'
 
 export default defineComponent({
   components: {
@@ -36,22 +38,23 @@ export default defineComponent({
     ActionBlock,
     Slider,
     PlayBlock,
+    PlayList
   },
-  setup(props) {
-    const store = useStore()
+  setup() {
     // 定义元素为HTMLMediaElement
     const audio = ref<HTMLMediaElement>()
-
     const playStatus = usePlayStatus(audio)
 
-    const songDetail = computed(() => store.state.song.songDetail)
+    const audioUrl = computed(() => SongStore.songDetail.url)
+    const showPlayList = ref(false)
 
     return {
       ...playStatus,
       audio,
-      songDetail,
+      audioUrl,
+      showPlayList
     }
-  },
+  }
 })
 </script>
 

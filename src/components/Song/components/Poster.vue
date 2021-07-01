@@ -1,35 +1,28 @@
 <template>
   <div class="poster" :style="posterStyle">
-    <div class="poster-container"></div>
+    <div class="poster-container" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, computed } from 'vue'
-// TODO 为什么这里不能用@别名
-const DEFAULT_POSTER = 'src/assets/img_poster_default.png'
+import { defineComponent, computed } from 'vue'
+import DEFAULT_POSTER from '@/assets/img_poster_default.png'
 
 export default defineComponent({
-  props: {
-    url: {
-      type: String,
-      default: '',
-    },
-  },
-  setup(props) {
-    const { url } = toRefs(props)
+  props: {},
+  setup() {
     const posterStyle = computed(() => {
       // const backgroundImg = url.value || DEFAULT_POSTER
       const backgroundImg = DEFAULT_POSTER
       return {
-        backgroundImage: `url(${backgroundImg})`,
+        backgroundImage: `url(${backgroundImg})`
       }
     })
 
     return {
-      posterStyle,
+      posterStyle
     }
-  },
+  }
 })
 </script>
 

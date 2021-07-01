@@ -8,27 +8,26 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { mapMutations, useStore } from 'vuex'
 import Header from '@/components/Header/index.vue'
 import Song from '@/components/Song/index.vue'
 import Lyric from '@/components/Lyric/index.vue'
 import useTab from '@/composables/app/useTab'
+import SongStore from '@/store/song'
 
 export default defineComponent({
   name: 'App',
   components: { Header, Song, Lyric },
   setup() {
-    const store = useStore()
     const { tabIndex } = useTab()
 
     onMounted(() => {
-      store.dispatch('song/getSongDetail')
+      SongStore.getSongList()
     })
 
     return {
-      tabIndex,
+      tabIndex
     }
-  },
+  }
 })
 </script>
 

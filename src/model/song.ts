@@ -7,10 +7,13 @@ export interface SongDeatail {
   singer: string
   isFavorite: boolean
   likeSinger: boolean
-  duration: number
   url: string
 }
 
 export interface SongDetailResponse extends Response {
   data: SongDeatail
+}
+
+export interface SongListResponse extends Response {
+  data: SongDeatail[]
 }

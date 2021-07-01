@@ -6,6 +6,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+// 在非模板中使用图片，只能先导入再使用
+import ICON_SING from '@/assets/icon_sing.png'
+import ICON_WAVE from '@/assets/icon_wave.png'
+import ICON_DOWNLOAD from '@/assets/icon_download.png'
+import ICON_COMMENT from '@/assets/icon_comment.png'
+import ICON_MORE from '@/assets/icon_more.png'
 
 interface BtnItem {
   key: string
@@ -15,32 +21,32 @@ interface BtnItem {
 const BTN_LIST: BtnItem[] = [
   {
     key: 'sing',
-    icon: 'src/assets/icon_sing.png',
+    icon: ICON_SING
   },
   {
     key: 'effect',
-    icon: 'src/assets/icon_wave.png',
+    icon: ICON_WAVE
   },
   {
     key: 'download',
-    icon: 'src/assets/icon_download.png',
+    icon: ICON_DOWNLOAD
   },
   {
     key: 'comment',
-    icon: 'src/assets/icon_comment.png',
+    icon: ICON_COMMENT
   },
   {
     key: 'more',
-    icon: 'src/assets/icon_more.png',
-  },
+    icon: ICON_MORE
+  }
 ]
 
 export default defineComponent({
   setup() {
     return {
-      BTN_LIST,
+      BTN_LIST
     }
-  },
+  }
 })
 </script>
 

@@ -111,6 +111,6 @@ export default (audio: Ref<HTMLMediaElement | undefined>) => {
     onTogglePlay,
     jumpForward15s,
     jumpBackward15s,
-    onChangeSlider,
+    onChangeSlider
   }
 }

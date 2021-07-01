@@ -1,6 +1,3 @@
-import { createStore } from 'vuex'
-import song from './song'
+import Vuex from 'vuex'
 
-export default createStore({
-  modules: { song },
-})
+export default new Vuex.Store({})

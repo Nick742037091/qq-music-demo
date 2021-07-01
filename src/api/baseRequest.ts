@@ -1,7 +1,7 @@
 import Axios, { AxiosError, AxiosResponse } from 'axios'
 
 const axios = Axios.create({
-  baseURL: 'dev',
+  baseURL: 'dev'
 })
 
 const respSuccessInterceptor = (response: AxiosResponse) => {

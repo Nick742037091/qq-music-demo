@@ -14,7 +14,9 @@
     "paths": {
       "@/*": ["src/*"],
       "src/*": ["src/*"],
-    }
+    },
+    // 支持@声明语法
+    "experimentalDecorators":true,
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 }

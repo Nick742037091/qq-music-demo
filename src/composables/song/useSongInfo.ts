@@ -1,16 +1,15 @@
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import SongStore from '@/store/song'
+import FAVORITE_ACTIVE_ICON from '@/assets/favorite-active.png'
+import FAVORITE_INACTIVE_ICON from '@/assets/favorite-inactive.png'
+
 export default () => {
-  const store = useStore()
   // 歌曲详情
-  const songDetail = computed(() => store.state.song.songDetail)
+  const songDetail = computed(() => SongStore.songDetail)
   const rowLyric = computed(() => '我的爱明明还在')
   /* ****** 收藏歌曲 *******/
   const favoriteIcon = computed(() =>
-    // TODO 这里为啥不用require
-    songDetail.value.isFavorite
-      ? 'src/assets/favorite-active.png'
-      : 'src/assets/favorite-inactive.png'
+    songDetail.value.isFavorite ? FAVORITE_ACTIVE_ICON : FAVORITE_INACTIVE_ICON
   )
   const onToggleFavorite = () => {
     songDetail.value.isFavorite = !songDetail.value.isFavorite
@@ -20,7 +19,7 @@ export default () => {
     songDetail.value.likeSinger ? '已关注' : '关注'
   )
   const likeStatusClass = computed(() => {
-    let cls = 'like '
+    const cls = 'like '
     return (
       cls + (songDetail.value.likeSinger ? 'like--active' : 'like--inactive')
     )
@@ -35,6 +34,6 @@ export default () => {
     likeSingerStatus,
     onToggleLikeSinger,
     likeStatusClass,
-    songDetail,
+    songDetail
   }
 }

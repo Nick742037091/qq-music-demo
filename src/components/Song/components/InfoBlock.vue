@@ -1,7 +1,9 @@
 <template>
   <div class="info-block">
     <div class="left-block">
-      <div class="song-name">{{ songDetail.name }}</div>
+      <div class="song-name">
+        {{ songDetail.name }}
+      </div>
       <div class="singer-block">
         <div>{{ songDetail.singer }}</div>
         <div :class="likeStatusClass" @click="onToggleLikeSinger">
@@ -9,7 +11,9 @@
         </div>
         <div class="vip">VIP</div>
       </div>
-      <div class="row-lyric">{{ rowLyric }}</div>
+      <div class="row-lyric">
+        {{ rowLyric }}
+      </div>
     </div>
 
     <img class="icon-favorite" :src="favoriteIcon" @click="onToggleFavorite" />
@@ -18,17 +22,15 @@
 
 <script lang="ts">
 import useSongInfo from '@/composables/song/useSongInfo'
-import { SongDeatail } from '@/model/song'
-import { computed, defineComponent, PropType } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
     const useSongInfoData = useSongInfo()
     return {
-      ...useSongInfoData,
+      ...useSongInfoData
     }
-  },
+  }
 })
 </script>
 

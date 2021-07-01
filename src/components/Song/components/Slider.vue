@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-wrapper" @click="onClickWrapper" ref="sliderWrapper">
+  <div ref="sliderWrapper" class="slider-wrapper" @click="onClickWrapper">
     <div class="progress-seek" />
     <div class="progress-buffered" />
     <div class="progress-played" :style="playedStyle" />
@@ -10,15 +10,16 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent, onMounted, toRefs } from 'vue'
+import { ref, computed, defineComponent, toRefs } from 'vue'
 
 export default defineComponent({
   props: {
     modelValue: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
+  emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
     const { modelValue } = toRefs(props)
     const playedRatio = computed(() => modelValue.value * 100 + '%')
@@ -43,9 +44,9 @@ export default defineComponent({
       playedStyle,
       draggerStyle,
       onClickWrapper,
-      sliderWrapper,
+      sliderWrapper
     }
-  },
+  }
 })
 </script>
 
