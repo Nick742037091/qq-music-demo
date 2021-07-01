@@ -37,6 +37,7 @@ export default defineComponent({
       if (value > 1) value = 1
       if (value < 0) value = 0
       emit('update:modelValue', value)
+      emit('change', value)
     }
     return {
       playedStyle,
@@ -83,11 +84,17 @@ export default defineComponent({
     z-index: 102;
     top: 50%;
     transform: translate(-50%, -50%);
+    &:hover {
+      .dragger {
+        transform: scale(2);
+      }
+    }
     .dragger {
       width: 8px;
       height: 8px;
       background-color: white;
       border-radius: 50%;
+      transition: all 0.2 ease;
     }
   }
 }

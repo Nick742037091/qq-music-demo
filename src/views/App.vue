@@ -1,33 +1,32 @@
 <template>
   <div class="app">
     <Header v-model:tab-index="tabIndex" />
-    <Song v-show="tabIndex === 1" :songDetail="songDetail" />
-    <Lyric v-show="tabIndex === 2" :content="songDetail.lyric" />
+    <Song v-show="tabIndex === 1" />
+    <Lyric v-show="tabIndex === 2" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
+import { mapMutations, useStore } from 'vuex'
 import Header from '@/components/Header/index.vue'
 import Song from '@/components/Song/index.vue'
 import Lyric from '@/components/Lyric/index.vue'
 import useTab from '@/composables/app/useTab'
-import useSongDetail from '@/composables/app/useSongDetail'
 
 export default defineComponent({
   name: 'App',
   components: { Header, Song, Lyric },
   setup() {
+    const store = useStore()
     const { tabIndex } = useTab()
-    const { songDetail, getSongDetail } = useSongDetail()
 
     onMounted(() => {
-      getSongDetail()
+      store.dispatch('song/getSongDetail')
     })
 
     return {
       tabIndex,
-      songDetail,
     }
   },
 })

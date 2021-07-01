@@ -3,17 +3,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  props: {
-    content: {
-      type: String,
-      default: '',
-    },
-  },
+  props: {},
   setup() {
-    return {}
+    const store = useStore()
+    const content = computed(() => store.state.song.songDetail.lyric)
+    return { content }
   },
 })
 </script>

@@ -3,7 +3,7 @@
     <Poster :url="songDetail.poster" />
     <InfoBlock :songDetail="songDetail" />
     <ActionBlock />
-    <Slider v-model="playedRatio" />
+    <Slider v-model="playedRatio" @change="onChangeSlider" />
     <div class="time-block">
       <div>{{ formatPlayedTime }}</div>
       <div>{{ formatDuration }}</div>
@@ -19,14 +19,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
-import { SongDeatail } from '@/model/song'
+import { computed, defineComponent, PropType, ref } from 'vue'
+import { useStore } from 'vuex'
 import Poster from './components/Poster.vue'
 import InfoBlock from './components/InfoBlock.vue'
 import ActionBlock from './components/ActionBlock.vue'
 import Slider from './components/Slider.vue'
 import PlayBlock from './components/PlayBlock.vue'
 import usePlayStatus from '@/composables/song/usePlayStatus'
+import { SongState } from '@/store/song/types'
 
 export default defineComponent({
   components: {
@@ -36,21 +37,19 @@ export default defineComponent({
     Slider,
     PlayBlock,
   },
-  props: {
-    songDetail: {
-      type: Object as PropType<SongDeatail>,
-      default: () => ({}),
-    },
-  },
   setup(props) {
+    const store = useStore()
     // 定义元素为HTMLMediaElement
     const audio = ref<HTMLMediaElement>()
 
     const playStatus = usePlayStatus(audio)
 
+    const songDetail = computed(() => store.state.song.songDetail)
+
     return {
       ...playStatus,
       audio,
+      songDetail,
     }
   },
 })

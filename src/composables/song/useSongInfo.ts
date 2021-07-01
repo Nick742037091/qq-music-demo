@@ -1,7 +1,9 @@
-import { SongDeatail } from '@/model/song'
-import { toRefs, computed } from 'vue'
-export default (props: { songDetail: SongDeatail }) => {
-  const { songDetail } = toRefs(props)
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+export default () => {
+  const store = useStore()
+  // 歌曲详情
+  const songDetail = computed(() => store.state.song.songDetail)
   const rowLyric = computed(() => '我的爱明明还在')
   /* ****** 收藏歌曲 *******/
   const favoriteIcon = computed(() =>
@@ -33,5 +35,6 @@ export default (props: { songDetail: SongDeatail }) => {
     likeSingerStatus,
     onToggleLikeSinger,
     likeStatusClass,
+    songDetail,
   }
 }

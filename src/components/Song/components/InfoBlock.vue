@@ -19,17 +19,12 @@
 <script lang="ts">
 import useSongInfo from '@/composables/song/useSongInfo'
 import { SongDeatail } from '@/model/song'
-import { defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  props: {
-    songDetail: {
-      type: Object as PropType<SongDeatail>,
-      default: () => ({}),
-    },
-  },
-  setup(props) {
-    const useSongInfoData = useSongInfo(props)
+  setup() {
+    const useSongInfoData = useSongInfo()
     return {
       ...useSongInfoData,
     }
