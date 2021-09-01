@@ -1,10 +1,10 @@
 import { get } from './baseRequest'
-import { SongDetailResponse, SongListResponse } from '@/model/song'
+import { SongDeatail } from '@/model/song'
 
-export const fetchSongDetail = (): Promise<SongDetailResponse> => {
-  return get('/song/detail')
+export const fetchSongDetail = () => {
+  return get<SongDeatail>('/song/detail')
 }
 
-export const fetchSongList = (): Promise<SongListResponse> => {
-  return get('/song/list')
+export const fetchSongList = () => {
+  return get<SongDeatail[]>('/song/list')
 }

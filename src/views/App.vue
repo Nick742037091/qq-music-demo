@@ -7,21 +7,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, watch } from 'vue'
 import Header from '@/components/Header/index.vue'
 import Song from '@/components/Song/index.vue'
 import Lyric from '@/components/Lyric/index.vue'
 import useTab from '@/composables/app/useTab'
 import SongStore from '@/store/song'
-
+import UserStore from '@/store/user'
 export default defineComponent({
   name: 'App',
   components: { Header, Song, Lyric },
   setup() {
     const { tabIndex } = useTab()
 
-    onMounted(() => {
+    onMounted(async () => {
       SongStore.getSongList()
+      UserStore.login()
     })
 
     return {
