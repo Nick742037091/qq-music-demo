@@ -9,11 +9,3 @@ export interface SongDeatail {
   likeSinger: boolean
   url: string
 }
-
-export interface SongDetailResponse extends Response {
-  data: SongDeatail
-}
-
-export interface SongListResponse extends Response {
-  data: SongDeatail[]
-}
