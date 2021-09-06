@@ -1,5 +1,3 @@
-import { Response } from '@/model/request'
-
 export interface SongDeatail {
   poster: string
   lyric: string

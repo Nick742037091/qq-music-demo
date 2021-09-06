@@ -5,3 +5,4 @@ Mockjs.setup({
 })
 
 import './song'
+import './user'

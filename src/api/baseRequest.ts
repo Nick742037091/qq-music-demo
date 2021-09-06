@@ -19,12 +19,8 @@ export const get = async <T>(
   url: string,
   config?: AxiosRequestConfig
 ): Promise<Response<T>> => {
-  try {
-    const res = await axios.get(url, config)
-    return res.data
-  } catch (e) {
-    throw e
-  }
+  const res = await axios.get(url, config)
+  return res.data
 }
 
 export const post = async <T>(
@@ -32,11 +28,7 @@ export const post = async <T>(
   data?: any,
   config?: AxiosRequestConfig
 ): Promise<Response<T>> => {
-  try {
-    const res = await axios.post(url, data, config)
-    return res.data
-  } catch (e) {
-    throw e
-  }
+  const res = await axios.post(url, data, config)
+  return res.data
 }
 export default axios
